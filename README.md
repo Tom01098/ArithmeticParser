@@ -10,5 +10,5 @@ Integer := Digit{Digit}
 
 Operator := '+' | '-' | '*'
 
-Expression := ['('] (Expression|Integer) {Operator (Expression|Integer)} [')']
+Expression := (Expression|Integer) {Operator (Expression|Integer)}
 ```
