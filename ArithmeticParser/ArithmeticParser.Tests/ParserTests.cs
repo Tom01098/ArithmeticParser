@@ -1,9 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ArithmeticParser.Tokens;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using ArithmeticParser.Tokens;
-using ArithmeticParser;
 
 namespace ArithmeticParser.Tests
 {

@@ -9,6 +9,9 @@ namespace ArithmeticParser
 {
     public class Lexer
     {
+        /// <summary>
+        /// End-of-file character
+        /// </summary>
         private const char EOF = '\uffff';
 
         /// <summary>
@@ -25,7 +28,7 @@ namespace ArithmeticParser
         public List<Token> Lex(string str)
         {
             StringReader reader;
-            var current = ' ';
+            char current;
 
             using (reader = new StringReader(str))
             {
