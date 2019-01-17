@@ -1,5 +1,6 @@
 using ArithmeticParser.Tokens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ArithmeticParser.Tests
 {
@@ -84,6 +85,13 @@ namespace ArithmeticParser.Tests
             Assert.IsInstanceOfType(tokens[3], typeof(MultiplyToken));
             Assert.IsInstanceOfType(tokens[4], typeof(IntegerToken));
             Assert.AreEqual(22, ((IntegerToken)tokens[4]).Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Invalid()
+        {
+            var tokens = new Lexer().Lex("w");
         }
     }
 }
