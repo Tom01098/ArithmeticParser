@@ -16,19 +16,21 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
-        public void OpenParenthesis()
+        public void Integer2()
         {
-            var tokens = new Lexer().Lex("(");
+            var tokens = new Lexer().Lex("34");
 
-            Assert.IsInstanceOfType(tokens[0], typeof(OpenParenthesisToken));
+            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
+            Assert.AreEqual(34, ((IntegerToken)tokens[0]).Value);
         }
 
         [TestMethod]
-        public void CloseParenthesis()
+        public void Integer3()
         {
-            var tokens = new Lexer().Lex(")");
+            var tokens = new Lexer().Lex("729");
 
-            Assert.IsInstanceOfType(tokens[0], typeof(CloseParenthesisToken));
+            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
+            Assert.AreEqual(729, ((IntegerToken)tokens[0]).Value);
         }
 
         [TestMethod]
@@ -48,11 +50,40 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
-        public void Multiple()
+        public void Multiply()
         {
             var tokens = new Lexer().Lex("*");
 
             Assert.IsInstanceOfType(tokens[0], typeof(MultiplyToken));
+        }
+
+        [TestMethod]
+        public void Multiple()
+        {
+            var tokens = new Lexer().Lex("3 + 4");
+
+            Assert.AreEqual(3, tokens.Count);
+            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
+            Assert.AreEqual(3, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[1], typeof(AddToken));
+            Assert.IsInstanceOfType(tokens[2], typeof(IntegerToken));
+            Assert.AreEqual(4, ((IntegerToken)tokens[2]).Value);
+        }
+
+        [TestMethod]
+        public void Multiple2()
+        {
+            var tokens = new Lexer().Lex("729 - 32 * 22");
+
+            Assert.AreEqual(5, tokens.Count);
+            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
+            Assert.AreEqual(729, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[1], typeof(SubtractToken));
+            Assert.IsInstanceOfType(tokens[2], typeof(IntegerToken));
+            Assert.AreEqual(32, ((IntegerToken)tokens[2]).Value);
+            Assert.IsInstanceOfType(tokens[3], typeof(MultiplyToken));
+            Assert.IsInstanceOfType(tokens[4], typeof(IntegerToken));
+            Assert.AreEqual(22, ((IntegerToken)tokens[4]).Value);
         }
     }
 }
