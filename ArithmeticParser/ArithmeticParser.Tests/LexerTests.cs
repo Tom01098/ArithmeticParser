@@ -53,6 +53,16 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void Negative()
+        {
+            var tokens = new Lexer("-3.3").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(SubtractToken));
+            Assert.IsInstanceOfType(tokens[1], typeof(NumberToken));
+            Assert.AreEqual(3.3, ((NumberToken)tokens[1]).Value);
+        }
+
+        [TestMethod]
         public void Add()
         {
             var tokens = new Lexer("+").Lex();

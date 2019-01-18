@@ -6,7 +6,7 @@ The EBNF representation of the syntax the parser should be able to parse is as f
 
 ```
 Digit := '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-Number := Digit{Digit} | Digit{Digit}.Digit{Digit}
+Number := [-](Digit{Digit} | Digit{Digit}.Digit{Digit})
 
 Operator := '+' | '-' | '*' | '/'
 

@@ -35,6 +35,20 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void NegativeNumber()
+        {
+            var tokens = new List<Token>
+            {
+                new SubtractToken(),
+                new NumberToken(3.5)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(-3.5, result);
+        }
+
+        [TestMethod]
         public void Add()
         {
             var tokens = new List<Token>
@@ -160,6 +174,22 @@ namespace ArithmeticParser.Tests
             var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(7.6, result);
+        }
+
+        [TestMethod]
+        public void Multiple5()
+        {
+            var tokens = new List<Token>
+            {
+                new SubtractToken(),
+                new NumberToken(3),
+                new AddToken(),
+                new NumberToken(4)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]
