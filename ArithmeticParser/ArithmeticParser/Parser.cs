@@ -28,19 +28,19 @@ namespace ArithmeticParser
         /// <returns>
         /// The result of parsing the tokens
         /// </returns>
-        public int Parse() => Expression();
+        public double Parse() => Expression();
 
-        // Expression := Integer {Operator Integer}
-        private int Expression()
+        // Expression := Number {Operator Number}
+        private double Expression()
         {
             tokens.MoveNext();
-            var result = Integer();
+            var result = Number();
 
             while (tokens.MoveNext())
             {
                 var op = Operator();
                 tokens.MoveNext();
-                var num = Integer();
+                var num = Number();
 
                 if (op is AddToken)
                 {
@@ -54,6 +54,10 @@ namespace ArithmeticParser
                 {
                     result *= num;
                 }
+                else if (op is DivideToken)
+                {
+                    result /= num;
+                }
                 else
                 {
                     throw new ArgumentException("Unsupported operator");
@@ -63,7 +67,7 @@ namespace ArithmeticParser
             return result;
         }
 
-        // Operator := '+' | '-' | '*'
+        // Operator := '+' | '-' | '*' | '/'
         private OperatorToken Operator()
         {
             if (tokens.Current is OperatorToken op)
@@ -75,12 +79,12 @@ namespace ArithmeticParser
                 $"Expected operator but got {tokens.Current}");
         }
 
-        // Integer := Digit{Digit}
-        private int Integer()
+        // Number := Digit{Digit} | Digit{Digit}.Digit{Digit}
+        private double Number()
         {
-            if (tokens.Current is IntegerToken)
+            if (tokens.Current is NumberToken)
             {
-                return ((IntegerToken)tokens.Current).Value;
+                return ((NumberToken)tokens.Current).Value;
             }
 
             throw new ArgumentException(

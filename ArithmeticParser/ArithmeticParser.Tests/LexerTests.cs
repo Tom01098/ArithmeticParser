@@ -12,8 +12,8 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new Lexer("3").Lex();
 
-            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
-            Assert.AreEqual(3, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(3, ((NumberToken)tokens[0]).Value);
         }
 
         [TestMethod]
@@ -21,8 +21,8 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new Lexer("34").Lex();
 
-            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
-            Assert.AreEqual(34, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(34, ((NumberToken)tokens[0]).Value);
         }
 
         [TestMethod]
@@ -30,8 +30,26 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new Lexer("729").Lex();
 
-            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
-            Assert.AreEqual(729, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(729, ((NumberToken)tokens[0]).Value);
+        }
+
+        [TestMethod]
+        public void Decimal()
+        {
+            var tokens = new Lexer("1.1").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(1.1, ((NumberToken)tokens[0]).Value);
+        }
+
+        [TestMethod]
+        public void Decimal2()
+        {
+            var tokens = new Lexer("332.87").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(332.87, ((NumberToken)tokens[0]).Value);
         }
 
         [TestMethod]
@@ -59,16 +77,24 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void Divide()
+        {
+            var tokens = new Lexer("/").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(DivideToken));
+        }
+
+        [TestMethod]
         public void Multiple()
         {
             var tokens = new Lexer("3 + 4").Lex();
 
             Assert.AreEqual(3, tokens.Count);
-            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
-            Assert.AreEqual(3, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(3, ((NumberToken)tokens[0]).Value);
             Assert.IsInstanceOfType(tokens[1], typeof(AddToken));
-            Assert.IsInstanceOfType(tokens[2], typeof(IntegerToken));
-            Assert.AreEqual(4, ((IntegerToken)tokens[2]).Value);
+            Assert.IsInstanceOfType(tokens[2], typeof(NumberToken));
+            Assert.AreEqual(4, ((NumberToken)tokens[2]).Value);
         }
 
         [TestMethod]
@@ -77,21 +103,28 @@ namespace ArithmeticParser.Tests
             var tokens = new Lexer("729 - 32 * 22").Lex();
 
             Assert.AreEqual(5, tokens.Count);
-            Assert.IsInstanceOfType(tokens[0], typeof(IntegerToken));
-            Assert.AreEqual(729, ((IntegerToken)tokens[0]).Value);
+            Assert.IsInstanceOfType(tokens[0], typeof(NumberToken));
+            Assert.AreEqual(729, ((NumberToken)tokens[0]).Value);
             Assert.IsInstanceOfType(tokens[1], typeof(SubtractToken));
-            Assert.IsInstanceOfType(tokens[2], typeof(IntegerToken));
-            Assert.AreEqual(32, ((IntegerToken)tokens[2]).Value);
+            Assert.IsInstanceOfType(tokens[2], typeof(NumberToken));
+            Assert.AreEqual(32, ((NumberToken)tokens[2]).Value);
             Assert.IsInstanceOfType(tokens[3], typeof(MultiplyToken));
-            Assert.IsInstanceOfType(tokens[4], typeof(IntegerToken));
-            Assert.AreEqual(22, ((IntegerToken)tokens[4]).Value);
+            Assert.IsInstanceOfType(tokens[4], typeof(NumberToken));
+            Assert.AreEqual(22, ((NumberToken)tokens[4]).Value);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Invalid()
+        public void InvalidCharacter()
         {
-            var tokens = new Lexer("w").Lex();
+            new Lexer("w").Lex();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvalidDecimal()
+        {
+            new Lexer("4.6.3").Lex();
         }
     }
 }

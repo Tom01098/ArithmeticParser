@@ -13,10 +13,10 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(3)
+                new NumberToken(3)
             };
 
-            int result = new Parser(tokens).Parse();
+            var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(3, result);
         }
@@ -26,12 +26,12 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new AddToken(),
-                new IntegerToken(2)
+                new NumberToken(2)
             };
 
-            int result = new Parser(tokens).Parse();
+            var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(56, result);
         }
@@ -41,12 +41,12 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new SubtractToken(),
-                new IntegerToken(2)
+                new NumberToken(2)
             };
 
-            int result = new Parser(tokens).Parse();
+            var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(52, result);
         }
@@ -56,14 +56,29 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(3),
+                new NumberToken(3),
                 new MultiplyToken(),
-                new IntegerToken(2)
+                new NumberToken(2)
             };
 
-            int result = new Parser(tokens).Parse();
+            var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void Divide()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(3),
+                new DivideToken(),
+                new NumberToken(2)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(1.5, result);
         }
 
         [TestMethod]
@@ -71,14 +86,14 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new SubtractToken(),
-                new IntegerToken(52),
+                new NumberToken(52),
                 new MultiplyToken(),
-                new IntegerToken(4)
+                new NumberToken(4)
             };
 
-            int result = new Parser(tokens).Parse();
+            var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(8, result);
         }
@@ -88,16 +103,33 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new AddToken(),
-                new IntegerToken(2),
+                new NumberToken(2),
                 new AddToken(),
-                new IntegerToken(5)
+                new NumberToken(5)
             };
 
-            int result = new Parser(tokens).Parse();
+            var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(61, result);
+        }
+
+        [TestMethod]
+        public void Multiple3()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(5),
+                new AddToken(),
+                new NumberToken(13),
+                new DivideToken(),
+                new NumberToken(2)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(9, result);
         }
 
         [TestMethod]
@@ -118,7 +150,7 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new MultiplyToken()
             };
 
@@ -131,9 +163,9 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new MultiplyToken(),
-                new IntegerToken(5),
+                new NumberToken(5),
                 new MultiplyToken()
             };
 
@@ -146,7 +178,7 @@ namespace ArithmeticParser.Tests
         {
             var tokens = new List<Token>
             {
-                new IntegerToken(54),
+                new NumberToken(54),
                 new MultiplyToken(),
                 new SubtractToken()
             };

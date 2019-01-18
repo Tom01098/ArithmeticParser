@@ -50,7 +50,7 @@ namespace ArithmeticParser
                 // Keep looping until EOF is reached
                 while (true)
                 {
-                    // Digits
+                    // Number
                     if (IsDigit(current))
                     {
                         do
@@ -58,10 +58,10 @@ namespace ArithmeticParser
                             builder.Append(current);
                             ReadNextChar();
                         }
-                        while (IsDigit(current));
+                        while (IsDigit(current) || current == '.');
 
-                        tokens.Add(new IntegerToken(
-                            int.Parse(builder.ToString())));
+                        tokens.Add(new NumberToken(
+                            double.Parse(builder.ToString())));
 
                         builder.Clear();
 
@@ -81,6 +81,11 @@ namespace ArithmeticParser
                     else if (current == '*')
                     {
                         tokens.Add(new MultiplyToken());
+                    }
+                    // Divide
+                    else if (current == '/')
+                    {
+                        tokens.Add(new DivideToken());
                     }
                     // EOF
                     else if (current == EOF)
