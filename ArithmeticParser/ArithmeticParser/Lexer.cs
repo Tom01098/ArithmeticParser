@@ -15,17 +15,27 @@ namespace ArithmeticParser
         private const char EOF = '\uffff';
 
         /// <summary>
-        /// Return a list of tokens based off an input string
+        /// The input string to lex
+        /// </summary>
+        private readonly string str;
+
+        /// <summary>
+        /// Create a lexer with the given string as input
         /// </summary>
         /// 
         /// <param name="str">
         /// The input string to lex
         /// </param>
+        public Lexer(string str) => this.str = str;
+
+        /// <summary>
+        /// Return a list of tokens based off an input string
+        /// </summary>
         /// 
         /// <returns>
         /// A list of tokens representing the string
         /// </returns>
-        public List<Token> Lex(string str)
+        public List<Token> Lex()
         {
             StringReader reader;
             char current;

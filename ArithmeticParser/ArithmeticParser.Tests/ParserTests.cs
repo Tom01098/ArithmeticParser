@@ -16,7 +16,7 @@ namespace ArithmeticParser.Tests
                 new IntegerToken(3)
             };
 
-            int result = new Parser().Parse(tokens);
+            int result = new Parser(tokens).Parse();
 
             Assert.AreEqual(3, result);
         }
@@ -31,7 +31,7 @@ namespace ArithmeticParser.Tests
                 new IntegerToken(2)
             };
 
-            int result = new Parser().Parse(tokens);
+            int result = new Parser(tokens).Parse();
 
             Assert.AreEqual(56, result);
         }
@@ -46,7 +46,7 @@ namespace ArithmeticParser.Tests
                 new IntegerToken(2)
             };
 
-            int result = new Parser().Parse(tokens);
+            int result = new Parser(tokens).Parse();
 
             Assert.AreEqual(52, result);
         }
@@ -61,7 +61,7 @@ namespace ArithmeticParser.Tests
                 new IntegerToken(2)
             };
 
-            int result = new Parser().Parse(tokens);
+            int result = new Parser(tokens).Parse();
 
             Assert.AreEqual(6, result);
         }
@@ -78,7 +78,7 @@ namespace ArithmeticParser.Tests
                 new IntegerToken(4)
             };
 
-            int result = new Parser().Parse(tokens);
+            int result = new Parser(tokens).Parse();
 
             Assert.AreEqual(8, result);
         }
@@ -95,7 +95,7 @@ namespace ArithmeticParser.Tests
                 new IntegerToken(5)
             };
 
-            int result = new Parser().Parse(tokens);
+            int result = new Parser(tokens).Parse();
 
             Assert.AreEqual(61, result);
         }
@@ -109,7 +109,7 @@ namespace ArithmeticParser.Tests
                 new MultiplyToken()
             };
 
-            new Parser().Parse(tokens);
+            new Parser(tokens).Parse();
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace ArithmeticParser.Tests
                 new MultiplyToken()
             };
 
-            new Parser().Parse(tokens);
+            new Parser(tokens).Parse();
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace ArithmeticParser.Tests
                 new MultiplyToken()
             };
 
-            new Parser().Parse(tokens);
+            new Parser(tokens).Parse();
         }
 
         [TestMethod]
@@ -151,7 +151,7 @@ namespace ArithmeticParser.Tests
                 new SubtractToken()
             };
 
-            new Parser().Parse(tokens);
+            new Parser(tokens).Parse();
         }
     }
 }
