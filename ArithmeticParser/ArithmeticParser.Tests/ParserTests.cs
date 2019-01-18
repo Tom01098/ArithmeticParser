@@ -9,7 +9,7 @@ namespace ArithmeticParser.Tests
     public class ParserTests
     {
         [TestMethod]
-        public void SingleInteger()
+        public void SingleNumber()
         {
             var tokens = new List<Token>
             {
@@ -19,6 +19,19 @@ namespace ArithmeticParser.Tests
             var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void SingleNumber2()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(3.5)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(3.5, result);
         }
 
         [TestMethod]
@@ -130,6 +143,23 @@ namespace ArithmeticParser.Tests
             var result = new Parser(tokens).Parse();
 
             Assert.AreEqual(9, result);
+        }
+
+        [TestMethod]
+        public void Multiple4()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(6.1),
+                new AddToken(),
+                new NumberToken(3.5),
+                new SubtractToken(),
+                new NumberToken(2)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(7.6, result);
         }
 
         [TestMethod]

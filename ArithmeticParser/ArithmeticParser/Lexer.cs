@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ArithmeticParser.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ArithmeticParser.Tokens;
 using static System.Char;
 
 namespace ArithmeticParser
@@ -53,8 +53,22 @@ namespace ArithmeticParser
                     // Number
                     if (IsDigit(current))
                     {
+                        int decimalCount = 0;
+
                         do
                         {
+                            if (current == '.')
+                            {
+                                if (decimalCount == 1)
+                                {
+                                    throw new ArgumentException(
+                                        "Only one decimal point " +
+                                        "allowed in a number");
+                                }
+
+                                decimalCount++;
+                            }
+
                             builder.Append(current);
                             ReadNextChar();
                         }
