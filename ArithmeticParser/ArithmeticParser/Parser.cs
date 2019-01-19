@@ -28,19 +28,22 @@ namespace ArithmeticParser
         /// <returns>
         /// The result of parsing the tokens
         /// </returns>
-        public double Parse() => Expression();
+        public double Parse()
+        {
+            tokens.Reset();
+            tokens.MoveNext();
+            return Expression();
+        }
 
-        // Expression := Number {Operator Number}
+        // Expression := Factor {Operator Factor}
         private double Expression()
         {
-            tokens.MoveNext();
-            var result = Number();
+            var result = Factor();
 
-            while (tokens.MoveNext())
+            while (tokens.MoveNext() && tokens.Current is OperatorToken op)
             {
-                var op = Operator();
                 tokens.MoveNext();
-                var num = Number();
+                var num = Factor();
 
                 if (op is AddToken)
                 {
@@ -60,23 +63,33 @@ namespace ArithmeticParser
                 }
                 else
                 {
-                    throw new ArgumentException("Unsupported operator");
+                    throw new ArgumentException($"Unsupported operator {op}");
                 }
             }
 
             return result;
         }
 
-        // Operator := '+' | '-' | '*' | '/'
-        private OperatorToken Operator()
+        // Factor := Number | '(' Expression ')'
+        private double Factor()
         {
-            if (tokens.Current is OperatorToken op)
+            if (tokens.Current is OpenParenthesisToken)
             {
-                return op;
-            }
+                tokens.MoveNext();
+                var result = Expression();
 
-            throw new ArgumentException(
-                $"Expected operator but got {tokens.Current}");
+                if (!(tokens.Current is CloseParenthesisToken))
+                {
+                    throw new ArgumentException(
+                        $"Expected ( but got {tokens.Current}");
+                }
+
+                return result;
+            }
+            else
+            {
+                return Number();
+            }
         }
 
         // Number := [-](Digit{Digit} | Digit{Digit}.Digit{Digit})
@@ -97,7 +110,7 @@ namespace ArithmeticParser
             }
 
             throw new ArgumentException(
-                $"Expected integer but got {tokens.Current}");
+                $"Expected number but got {tokens.Current}");
         }
     }
 }
