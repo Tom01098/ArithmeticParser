@@ -1,5 +1,6 @@
 # ArithmeticParser
 A simple parser for evaluating simple arithmetic expressions. Made to learn recursive-descent parsers, Backus-Naur form, and hopefully have fun along the way :)
+Inspired by [this great tutorial](http://blog.roboblob.com/2014/12/16/recursive-descent-parser-for-arithmetic-expressions-with-real-numbers/).
 
 ## Extended Backus-Naur Form Representation
 The EBNF representation of the syntax the parser should be able to parse is as follows.
