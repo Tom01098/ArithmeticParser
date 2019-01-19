@@ -92,7 +92,7 @@ namespace ArithmeticParser
             }
         }
 
-        // Number := [-](Digit{Digit} | Digit{Digit}.Digit{Digit})
+        // Number := [-](Integer | Integer.Integer)
         private double Number()
         {
             bool isNegative = false;
