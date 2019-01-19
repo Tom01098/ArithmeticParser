@@ -101,6 +101,16 @@ namespace ArithmeticParser
                     {
                         tokens.Add(new DivideToken());
                     }
+                    // Open Parenthesis
+                    else if (current == '(')
+                    {
+                        tokens.Add(new OpenParenthesisToken());
+                    }
+                    // Close Parenthesis
+                    else if (current == ')')
+                    {
+                        tokens.Add(new CloseParenthesisToken());
+                    }
                     // EOF
                     else if (current == EOF)
                     {
