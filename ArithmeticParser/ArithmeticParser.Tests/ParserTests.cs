@@ -109,6 +109,37 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void ParenthesisedNumber()
+        {
+            var tokens = new List<Token>
+            {
+                new OpenParenthesisToken(),
+                new NumberToken(3.4),
+                new CloseParenthesisToken()
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(3.4, result);
+        }
+
+        [TestMethod]
+        public void ParenthesisedNumber2()
+        {
+            var tokens = new List<Token>
+            {
+                new OpenParenthesisToken(),
+                new SubtractToken(),
+                new NumberToken(3.4),
+                new CloseParenthesisToken()
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(-3.4, result);
+        }
+
+        [TestMethod]
         public void Multiple()
         {
             var tokens = new List<Token>
@@ -209,6 +240,27 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void MultipleParenthesisedExpressions()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(3),
+                new AddToken(),
+                new OpenParenthesisToken(),
+                new NumberToken(4),
+                new MultiplyToken(),
+                new OpenParenthesisToken(),
+                new NumberToken(3),
+                new CloseParenthesisToken(),
+                new CloseParenthesisToken()
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(15, result);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Invalid()
         {
@@ -257,6 +309,19 @@ namespace ArithmeticParser.Tests
                 new NumberToken(54),
                 new MultiplyToken(),
                 new SubtractToken()
+            };
+
+            new Parser(tokens).Parse();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Invalid5()
+        {
+            var tokens = new List<Token>
+            {
+                new OpenParenthesisToken(),
+                new NumberToken(3.3)
             };
 
             new Parser(tokens).Parse();

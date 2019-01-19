@@ -10,5 +10,6 @@ Number := [-](Digit{Digit} | Digit{Digit}.Digit{Digit})
 
 Operator := '+' | '-' | '*' | '/'
 
-Expression := Number {Operator Number}
+Factor := Number | '(' Expression ')'
+Expression := Factor {Operator Factor}
 ```

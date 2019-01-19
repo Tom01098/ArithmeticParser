@@ -95,6 +95,37 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void OpenParenthesis()
+        {
+            var tokens = new Lexer("(").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(OpenParenthesisToken));
+        }
+
+        [TestMethod]
+        public void CloseParenthesis()
+        {
+            var tokens = new Lexer(")").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(CloseParenthesisToken));
+        }
+
+        [TestMethod]
+        public void ParenthesisedExpression()
+        {
+            var tokens = new Lexer("(3 + 4)").Lex();
+
+            Assert.AreEqual(5, tokens.Count);
+            Assert.IsInstanceOfType(tokens[0], typeof(OpenParenthesisToken));
+            Assert.IsInstanceOfType(tokens[1], typeof(NumberToken));
+            Assert.AreEqual(3, ((NumberToken)tokens[1]).Value);
+            Assert.IsInstanceOfType(tokens[2], typeof(AddToken));
+            Assert.IsInstanceOfType(tokens[3], typeof(NumberToken));
+            Assert.AreEqual(4, ((NumberToken)tokens[3]).Value);
+            Assert.IsInstanceOfType(tokens[4], typeof(CloseParenthesisToken));
+        }
+
+        [TestMethod]
         public void Multiple()
         {
             var tokens = new Lexer("3 + 4").Lex();
