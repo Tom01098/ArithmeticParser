@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArithmeticParser", "ArithmeticParser\ArithmeticParser.csproj", "{6DAEC712-BEC4-4464-A1A3-7832AEECF18B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArithmeticParser", "ArithmeticParser\ArithmeticParser.csproj", "{6DAEC712-BEC4-4464-A1A3-7832AEECF18B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArithmeticParser.Tests", "ArithmeticParser.Tests\ArithmeticParser.Tests.csproj", "{12387314-4FC5-4E54-AB26-6E388C22A8DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArithmeticParser.Tests", "ArithmeticParser.Tests\ArithmeticParser.Tests.csproj", "{12387314-4FC5-4E54-AB26-6E388C22A8DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArithmeticParser.Interactive", "ArithmeticParser.Interactive\ArithmeticParser.Interactive.csproj", "{E47A1184-77D2-4CB4-A67F-C1BF0FB02A9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{12387314-4FC5-4E54-AB26-6E388C22A8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12387314-4FC5-4E54-AB26-6E388C22A8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12387314-4FC5-4E54-AB26-6E388C22A8DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47A1184-77D2-4CB4-A67F-C1BF0FB02A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47A1184-77D2-4CB4-A67F-C1BF0FB02A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47A1184-77D2-4CB4-A67F-C1BF0FB02A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47A1184-77D2-4CB4-A67F-C1BF0FB02A9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

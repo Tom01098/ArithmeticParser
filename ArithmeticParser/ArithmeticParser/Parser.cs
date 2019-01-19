@@ -63,7 +63,8 @@ namespace ArithmeticParser
                 }
                 else
                 {
-                    throw new ArgumentException($"Unsupported operator {op}");
+                    throw new ArgumentException(
+                        $"Unsupported operator '{op}'");
                 }
             }
 
@@ -81,7 +82,7 @@ namespace ArithmeticParser
                 if (!(tokens.Current is CloseParenthesisToken))
                 {
                     throw new ArgumentException(
-                        $"Expected ( but got {tokens.Current}");
+                        $"Expected ')' but got '{tokens.Current}'");
                 }
 
                 return result;
@@ -110,7 +111,7 @@ namespace ArithmeticParser
             }
 
             throw new ArgumentException(
-                $"Expected number but got {tokens.Current}");
+                $"Expected a number but got '{tokens.Current}'");
         }
     }
 }

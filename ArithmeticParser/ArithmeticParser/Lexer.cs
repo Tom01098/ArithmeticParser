@@ -63,7 +63,7 @@ namespace ArithmeticParser
                                 {
                                     throw new ArgumentException(
                                         "Only one decimal point " +
-                                        "allowed in a number");
+                                        "is allowed in a number");
                                 }
 
                                 decimalCount++;
@@ -120,7 +120,7 @@ namespace ArithmeticParser
                     else if (!IsWhiteSpace(current))
                     {
                         throw new ArgumentException(
-                            $"{current} is an invalid character");
+                            $"'{current}' is an invalid character");
                     }
 
                     ReadNextChar();
