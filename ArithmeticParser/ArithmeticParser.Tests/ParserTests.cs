@@ -193,6 +193,22 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void Multiple6()
+        {
+            var tokens = new List<Token>
+            {
+                new SubtractToken(),
+                new NumberToken(3),
+                new SubtractToken(),
+                new NumberToken(4)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(-7, result);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Invalid()
         {

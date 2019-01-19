@@ -79,12 +79,21 @@ namespace ArithmeticParser
                 $"Expected operator but got {tokens.Current}");
         }
 
-        // Number := Digit{Digit} | Digit{Digit}.Digit{Digit}
+        // Number := [-](Digit{Digit} | Digit{Digit}.Digit{Digit})
         private double Number()
         {
+            bool isNegative = false;
+
+            if (tokens.Current is SubtractToken)
+            {
+                isNegative = true;
+                tokens.MoveNext();
+            }
+
             if (tokens.Current is NumberToken)
             {
-                return ((NumberToken)tokens.Current).Value;
+                double value = ((NumberToken)tokens.Current).Value;
+                return isNegative ? -value : value;
             }
 
             throw new ArgumentException(
