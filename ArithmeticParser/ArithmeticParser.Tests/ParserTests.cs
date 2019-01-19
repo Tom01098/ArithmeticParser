@@ -341,5 +341,19 @@ namespace ArithmeticParser.Tests
 
             new Parser(tokens).Parse();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(DivideByZeroException))]
+        public void DivideByZero()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(4),
+                new DivideToken(),
+                new NumberToken(0)
+            };
+
+            new Parser(tokens).Parse();
+        }
     }
 }

@@ -59,6 +59,11 @@ namespace ArithmeticParser
                 }
                 else if (op is DivideToken)
                 {
+                    if (num == 0)
+                    {
+                        throw new DivideByZeroException();
+                    }
+
                     result /= num;
                 }
                 else if (op is ExponentToken)
