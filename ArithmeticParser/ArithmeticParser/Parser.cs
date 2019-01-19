@@ -61,6 +61,10 @@ namespace ArithmeticParser
                 {
                     result /= num;
                 }
+                else if (op is ExponentToken)
+                {
+                    result = Math.Pow(result, num);
+                }
                 else
                 {
                     throw new ArgumentException(

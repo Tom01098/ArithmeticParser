@@ -10,7 +10,7 @@ Digit := '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 Integer := Digit{Digit}
 Number := [-](Integer | Integer.Integer)
 
-Operator := '+' | '-' | '*' | '/'
+Operator := '+' | '-' | '*' | '/' | '**'
 
 Factor := Number | '(' Expression ')'
 Expression := Factor {Operator Factor}

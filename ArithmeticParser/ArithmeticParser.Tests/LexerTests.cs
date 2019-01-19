@@ -95,6 +95,14 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void Exponent()
+        {
+            var tokens = new Lexer("**").Lex();
+
+            Assert.IsInstanceOfType(tokens[0], typeof(ExponentToken));
+        }
+
+        [TestMethod]
         public void OpenParenthesis()
         {
             var tokens = new Lexer("(").Lex();

@@ -91,10 +91,20 @@ namespace ArithmeticParser
                     {
                         tokens.Add(new SubtractToken());
                     }
-                    // Multiply
+                    // Multiply/Exponent
                     else if (current == '*')
                     {
-                        tokens.Add(new MultiplyToken());
+                        ReadNextChar();
+
+                        if (current == '*')
+                        {
+                            tokens.Add(new ExponentToken());
+                        }
+                        else
+                        {
+                            tokens.Add(new MultiplyToken());
+                            continue;
+                        }
                     }
                     // Divide
                     else if (current == '/')

@@ -109,6 +109,21 @@ namespace ArithmeticParser.Tests
         }
 
         [TestMethod]
+        public void Exponent()
+        {
+            var tokens = new List<Token>
+            {
+                new NumberToken(3),
+                new ExponentToken(),
+                new NumberToken(2)
+            };
+
+            var result = new Parser(tokens).Parse();
+
+            Assert.AreEqual(9, result);
+        }
+
+        [TestMethod]
         public void ParenthesisedNumber()
         {
             var tokens = new List<Token>
