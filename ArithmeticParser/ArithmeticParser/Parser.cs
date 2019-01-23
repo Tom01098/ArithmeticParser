@@ -30,9 +30,16 @@ namespace ArithmeticParser
         /// </returns>
         public double Parse()
         {
-            tokens.Reset();
             tokens.MoveNext();
-            return Expression();
+            var expression = Expression();
+
+            if (!(tokens.Current is null))
+            {
+                throw new ArgumentException(
+                    $"Unexpected token '{tokens.Current}'");
+            }
+
+            return expression;
         }
 
         // Expression := Factor {Operator Factor}
