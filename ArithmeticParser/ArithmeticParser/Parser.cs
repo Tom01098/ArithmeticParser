@@ -109,7 +109,7 @@ namespace ArithmeticParser
             }
         }
 
-        // Number := [-](Integer | Integer.Integer)
+        // Number := [-]Integer['.'Integer]
         private double Number()
         {
             bool isNegative = false;
